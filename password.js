@@ -9,19 +9,19 @@ const chars = "abcdefghijklmnopqrstuvwxyz";
 const charsUpper = chars.toUpperCase();
 const numbers = "0123456789";
 const charsSpecial = ",;:!/.?%*@";
-
 const all = [chars, charsUpper, numbers, charsSpecial];
+let password = "";
 
 // récupérer 8 caractères de manière aléatoire
-let password = "";
+
 password += chars[Math.floor(Math.random() * chars.length)]
 password += charsUpper[Math.floor(Math.random() * charsUpper.length)]
 password += numbers[Math.floor(Math.random() * numbers.length)]
 password += charsSpecial[Math.floor(Math.random() * charsSpecial.length)]
-console.log(password);
+
 
 function charsRandom(all, lengthPassword) {
-    for (let i = 4; i <= lengthPassword; i++) {
+    for (let i = password.length ; i <= lengthPassword - 1; i++) {
         let groupRandom = all[Math.floor(Math.random() * all.length)]
         let randomChar = groupRandom[Math.floor(Math.random() * groupRandom.length)]
         password += randomChar
@@ -34,15 +34,16 @@ function shuffle (password) {
     let passwordTable = password.split("")
     let stringLength = passwordTable.length;
 
-    for(let i = stringLength - 1; i > 0; i--) {
-        let random = Math.floor(Math.random() * (i + 1));
-        let newPassword = passwordTable[i];
+    for(let i = 1; i <= stringLength - 1; i++) {
+        let random = Math.floor(Math.random() * i );
+        let newShuffleChar = passwordTable[i];
         passwordTable[i] = passwordTable[random];
-        passwordTable[random] = newPassword;
+        passwordTable[random] = newShuffleChar;
     }
     return passwordTable.join("");
 }
 
 
 // afficher le mot de passe
+console.log(charsRandom(all, 9))
 console.log(shuffle(charsRandom(all, 9)));
